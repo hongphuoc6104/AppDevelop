@@ -139,53 +139,7 @@ Tạo class `Product` với:
 - Named constructor `Product.fromMap(Map data)`
 - Named constructor `Product.sample()` (tạo sản phẩm mẫu để test)
 
-<details>
-<summary>💡 Xem đáp án</summary>
-
-```dart
-class Product {
-  String name;
-  double price;
-  int stock;
-  
-  Product(this.name, this.price, this.stock);
-  
-  Product.free(String name, int stock)
-    : name = name,
-      price = 0.0,
-      stock = stock;
-  
-  Product.fromMap(Map<String, dynamic> data)
-    : name = data['name'],
-      price = data['price'].toDouble(),
-      stock = data['stock'];
-  
-  Product.sample()
-    : name = 'Sample Product',
-      price = 99.99,
-      stock = 100;
-  
-  @override
-  String toString() => 'Product: $name, \$$price, Stock: $stock';
-}
-
-void main() {
-  var p1 = Product('Laptop', 1200, 5);
-  var p2 = Product.free('Free Ebook', 1000);
-  var p3 = Product.sample();
-  var p4 = Product.fromMap({
-    'name': 'Phone',
-    'price': 800,
-    'stock': 10
-  });
-  
-  print(p1);
-  print(p2);
-  print(p3);
-  print(p4);
-}
-```
-</details>
+> Xem đáp án trong file `solutions.md`
 
 ---
 
@@ -297,61 +251,7 @@ Tạo class `BankAccount` với:
   - `interestRate` (optional, default = 0.05)
   - `isActive` (optional, default = true)
 
-<details>
-<summary>💡 Xem đáp án</summary>
-
-```dart
-class BankAccount {
-  String accountNumber;
-  double balance;
-  String ownerName;
-  String type;
-  double interestRate;
-  bool isActive;
-  
-  BankAccount(
-    this.accountNumber,
-    this.balance,
-    {
-      required this.ownerName,
-      this.type = 'savings',
-      this.interestRate = 0.05,
-      this.isActive = true,
-    }
-  );
-  
-  @override
-  String toString() {
-    return 'Account: $accountNumber\n'
-           'Owner: $ownerName\n'
-           'Balance: \$$balance\n'
-           'Type: $type\n'
-           'Rate: ${interestRate * 100}%\n'
-           'Active: $isActive';
-  }
-}
-
-void main() {
-  var account1 = BankAccount(
-    'ACC001',
-    1000,
-    ownerName: 'John Doe',
-  );
-  
-  var account2 = BankAccount(
-    'ACC002',
-    5000,
-    ownerName: 'Jane Smith',
-    type: 'checking',
-    interestRate: 0.02,
-  );
-  
-  print(account1);
-  print('\n---\n');
-  print(account2);
-}
-```
-</details>
+> Xem đáp án trong file `solutions.md`
 
 ---
 
@@ -481,52 +381,7 @@ Tạo class `Temperature` với:
 - Computed getter cho `kelvin` (K = C + 273.15)
 - Setter cho `fahrenheit` (tính ngược lại celsius)
 
-<details>
-<summary>💡 Xem đáp án</summary>
-
-```dart
-class Temperature {
-  double _celsius = 0;
-  
-  // Celsius getter/setter
-  double get celsius => _celsius;
-  
-  set celsius(double value) {
-    _celsius = value;
-  }
-  
-  // Fahrenheit - computed property
-  double get fahrenheit => _celsius * 9 / 5 + 32;
-  
-  set fahrenheit(double value) {
-    _celsius = (value - 32) * 5 / 9;
-  }
-  
-  // Kelvin - read-only computed property
-  double get kelvin => _celsius + 273.15;
-  
-  @override
-  String toString() {
-    return '${celsius.toStringAsFixed(2)}°C = '
-           '${fahrenheit.toStringAsFixed(2)}°F = '
-           '${kelvin.toStringAsFixed(2)}K';
-  }
-}
-
-void main() {
-  var temp = Temperature();
-  
-  temp.celsius = 0;
-  print(temp); // 0°C = 32°F = 273.15K
-  
-  temp.celsius = 100;
-  print(temp); // 100°C = 212°F = 373.15K
-  
-  temp.fahrenheit = 68;
-  print(temp); // 20°C = 68°F = 293.15K
-}
-```
-</details>
+> Xem đáp án trong file `solutions.md`
 
 ---
 
@@ -694,227 +549,47 @@ Tạo:
    - `void updateTimestamp()`
 3. Class `Article` kế thừa cả 2 mixins
 
-<details>
-<summary>💡 Xem đáp án</summary>
-
-```dart
-import 'dart:convert';
-
-mixin Serializable {
-  Map<String, dynamic> toJson();
-  
-  String toJsonString() {
-    return json.encode(toJson());
-  }
-}
-
-mixin Timestamped {
-  DateTime? _createdAt;
-  DateTime? _updatedAt;
-  
-  DateTime get createdAt => _createdAt ?? DateTime.now();
-  DateTime get updatedAt => _updatedAt ?? DateTime.now();
-  
-  void initTimestamp() {
-    _createdAt = DateTime.now();
-    _updatedAt = DateTime.now();
-  }
-  
-  void updateTimestamp() {
-    _updatedAt = DateTime.now();
-  }
-}
-
-class Article with Serializable, Timestamped {
-  String title;
-  String content;
-  String author;
-  
-  Article(this.title, this.content, this.author) {
-    initTimestamp();
-  }
-  
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'content': content,
-      'author': author,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
-    };
-  }
-  
-  void edit(String newContent) {
-    content = newContent;
-    updateTimestamp();
-  }
-}
-
-void main() async {
-  var article = Article(
-    'Học Dart',
-    'Dart là ngôn ngữ tuyệt vời!',
-    'John'
-  );
-  
-  print(article.toJsonString());
-  
-  // Chờ 2 giây
-  await Future.delayed(Duration(seconds: 2));
-  
-  article.edit('Dart rất dễ học!');
-  print('\nSau khi edit:');
-  print(article.toJsonString());
-}
-```
-</details>
+> Xem đáp án trong file `solutions.md`
 
 ---
 
 ## 🎯 Phần 5: Bài tập tổng hợp (15 phút)
 
-### Bài tập cuối ngày
-
-Tạo một mini-project: **Hệ thống quản lý thư viện**
+### Bài tập cuối ngày - Hệ thống quản lý thư viện 📚
 
 **Yêu cầu:**
 
 1. **Mixin `Borrowable`:**
-   - `bool isBorrowed`
-   - `void borrow()`
-   - `void returnItem()`
+   - Property `bool isBorrowed`
+   - Method `void borrow()`
+   - Method `void returnItem()`
 
 2. **Mixin `Searchable`:**
-   - `bool matchesQuery(String query)`
+   - Method `bool matchesQuery(String query)`
 
 3. **Class `Book`:**
    - Properties: `title`, `author`, `isbn`, `year`
-   - Sử dụng cả 2 mixins
+   - Sử dụng cả 2 mixins (`Borrowable` và `Searchable`)
    - Named constructors:
      - `Book.fromJson(Map data)`
      - `Book.sample()` (tạo sách mẫu)
    - Getter `description` (tính toán từ các fields)
+   - Override `toString()` để hiển thị thông tin đầy đủ
 
 4. **Class `Library`:**
-   - List of books
-   - Method `addBook(Book book)`
-   - Method `searchBooks(String query)` - sử dụng Searchable
-   - Method `borrowBook(String isbn)` - sử dụng Borrowable
-   - Method `returnBook(String isbn)`
+   - Property: `List<Book> books`
+   - Method `addBook(Book book)` - thêm sách
+   - Method `searchBooks(String query)` - tìm sách (sử dụng Searchable mixin)
+   - Method `borrowBook(String isbn)` - mượn sách (sử dụng Borrowable mixin)
+   - Method `returnBook(String isbn)` - trả sách
+   - Method `showAllBooks()` - hiển thị tất cả sách
 
-<details>
-<summary>💡 Xem đáp án</summary>
-
+**Test cases để kiểm tra:**
 ```dart
-mixin Borrowable {
-  bool _isBorrowed = false;
-  
-  bool get isBorrowed => _isBorrowed;
-  
-  void borrow() {
-    if (_isBorrowed) {
-      print('Already borrowed!');
-    } else {
-      _isBorrowed = true;
-      print('Borrowed successfully!');
-    }
-  }
-  
-  void returnItem() {
-    if (!_isBorrowed) {
-      print('Not borrowed!');
-    } else {
-      _isBorrowed = false;
-      print('Returned successfully!');
-    }
-  }
-}
-
-mixin Searchable {
-  bool matchesQuery(String query);
-}
-
-class Book with Borrowable, Searchable {
-  String title;
-  String author;
-  String isbn;
-  int year;
-  
-  Book({
-    required this.title,
-    required this.author,
-    required this.isbn,
-    required this.year,
-  });
-  
-  Book.fromJson(Map<String, dynamic> json)
-    : title = json['title'],
-      author = json['author'],
-      isbn = json['isbn'],
-      year = json['year'];
-  
-  Book.sample()
-    : title = 'Sample Book',
-      author = 'John Doe',
-      isbn = '000-0000000',
-      year = 2024;
-  
-  String get description => 
-    '$title by $author ($year) - ISBN: $isbn';
-  
-  @override
-  bool matchesQuery(String query) {
-    query = query.toLowerCase();
-    return title.toLowerCase().contains(query) ||
-           author.toLowerCase().contains(query) ||
-           isbn.contains(query);
-  }
-  
-  @override
-  String toString() => description + (isBorrowed ? ' [BORROWED]' : '');
-}
-
-class Library {
-  List<Book> books = [];
-  
-  void addBook(Book book) {
-    books.add(book);
-    print('Added: ${book.title}');
-  }
-  
-  List<Book> searchBooks(String query) {
-    return books.where((book) => book.matchesQuery(query)).toList();
-  }
-  
-  void borrowBook(String isbn) {
-    var book = books.firstWhere(
-      (b) => b.isbn == isbn,
-      orElse: () => throw Exception('Book not found')
-    );
-    book.borrow();
-  }
-  
-  void returnBook(String isbn) {
-    var book = books.firstWhere(
-      (b) => b.isbn == isbn,
-      orElse: () => throw Exception('Book not found')
-    );
-    book.returnItem();
-  }
-  
-  void showAllBooks() {
-    print('\n=== Library Books ===');
-    for (var book in books) {
-      print(book);
-    }
-  }
-}
-
 void main() {
   var library = Library();
   
-  // Thêm sách
+  // 1. Thêm sách bằng constructor thường
   library.addBook(Book(
     title: 'Clean Code',
     author: 'Robert Martin',
@@ -922,13 +597,7 @@ void main() {
     year: 2008,
   ));
   
-  library.addBook(Book(
-    title: 'The Pragmatic Programmer',
-    author: 'Andrew Hunt',
-    isbn: '978-0201616224',
-    year: 1999,
-  ));
-  
+  // 2. Thêm sách bằng fromJson
   library.addBook(Book.fromJson({
     'title': 'Design Patterns',
     'author': 'Gang of Four',
@@ -936,27 +605,24 @@ void main() {
     'year': 1994,
   }));
   
+  // 3. Hiển thị tất cả sách
   library.showAllBooks();
   
-  // Tìm kiếm
-  print('\n=== Search "clean" ===');
+  // 4. Tìm kiếm sách
   var results = library.searchBooks('clean');
-  results.forEach(print);
   
-  // Mượn sách
-  print('\n=== Borrow Book ===');
+  // 5. Mượn sách
   library.borrowBook('978-0132350884');
   
+  // 6. Hiển thị lại (sách đã mượn phải có dấu [BORROWED])
   library.showAllBooks();
   
-  // Trả sách
-  print('\n=== Return Book ===');
+  // 7. Trả sách
   library.returnBook('978-0132350884');
-  
-  library.showAllBooks();
 }
 ```
-</details>
+
+> Xem đáp án trong file `solutions.md`
 
 ---
 
