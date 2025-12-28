@@ -30,10 +30,10 @@
 // Kết quả in ra phải giống mẫu: "Invoice: Bought 2 Laptop(s). Total: $3000"
 
 void main() {
-    String productName = "Laptop(s)";
-    int price = 1500;
-    int quantity = 2;
-    int total = price * quantity;
+    productName = "Laptop(s)";
+    price = 1500;
+    quantity = 2;
+    total = price * quantity;
     print("Invoice: Bought $quantity $productName. Total: \$$total");
 }
 
