@@ -1,7 +1,7 @@
 # Dart/Flutter Learning Roadmap: 0 to Hero
 
 > **Goal:** Become a Flutter Mobile Developer  
-> **Start Date:** 24/12/2024
+> **Start Date:** 24/12/2025
 
 ---
 
@@ -66,40 +66,40 @@
 - [x] `late` keyword
 - [x] Flow analysis
 
-## A6. Collections ✅ IN PROGRESS
-- [/] List (create, add, remove, access, iterate)
-- [ ] List methods (`add`, `remove`, `contains`, `indexOf`)
-- [ ] Set (unique values, operations)
-- [ ] Map (key-value pairs, access, iterate)
-- [ ] Spread operator (`...`, `...?`)
-- [ ] Collection if
-- [ ] Collection for
-- [ ] `map()` - transform elements
-- [ ] `where()` - filter elements
-- [ ] `reduce()` - aggregate values
-- [ ] `fold()` - aggregate with initial value
-- [ ] `any()` / `every()` - test conditions
-- [ ] `firstWhere()` / `lastWhere()`
-- [ ] `sort()` / `reversed`
+## A6. Collections ✅ COMPLETED
+- [x] List (create, add, remove, access, iterate)
+- [x] List methods (`add`, `remove`, `contains`, `indexOf`)
+- [x] Set (unique values, operations)
+- [x] Map (key-value pairs, access, iterate)
+- [x] Spread operator (`...`, `...?`)
+- [x] Collection if
+- [x] Collection for
+- [x] `map()` - transform elements
+- [x] `where()` - filter elements
+- [x] `reduce()` - aggregate values
+- [x] `fold()` - aggregate with initial value
+- [x] `any()` / `every()` - test conditions
+- [x] `firstWhere()` / `lastWhere()`
+- [x] `sort()` / `reversed`
 
-## A7. Asynchronous Programming
-- [ ] `Future` concept
-- [ ] `async` / `await`
-- [ ] `Future.delayed()`
-- [ ] `Future.value()`
-- [ ] `Future.error()`
-- [ ] `Future.wait()` - parallel execution
-- [ ] `Future.timeout()`
-- [ ] `.then()` / `.catchError()` / `.whenComplete()`
-- [ ] Error handling with `try-catch-finally`
-- [ ] `Stream` concept
-- [ ] `async*` / `yield`
+## A7. Asynchronous Programming ✅ COMPLETED (90%)
+- [x] `Future` concept
+- [x] `async` / `await`
+- [x] `Future.delayed()`
+- [x] `Future.value()`
+- [x] `Future.error()`
+- [x] `Future.wait()` - parallel execution
+- [x] `Future.timeout()`
+- [x] `.then()` / `.catchError()` / `.whenComplete()`
+- [x] Error handling with `try-catch-finally`
+- [x] `Stream` concept
+- [x] `async*` / `yield`
 - [ ] `StreamController`
-- [ ] `Stream.listen()`
+- [x] `Stream.listen()`
 - [ ] Stream transformations
 - [ ] Broadcast streams
 
-## A8. Advanced Dart
+## A8. Advanced Dart ⏳ IN PROGRESS
 - [ ] Generics (`<T>`)
 - [ ] Generic classes
 - [ ] Generic methods
@@ -379,9 +379,9 @@
 
 # Current Progress
 
-**Current Section:** A6. Collections  
-**Status:** In Progress  
-**Next:** A7. Asynchronous Programming
+**Current Section:** A8. Advanced Dart  
+**Status:** Starting  
+**Next:** A9. Error Handling
 
 ### Completed
 - [x] A1: Variables, Data Types, Operators, String Interpolation
@@ -390,6 +390,8 @@
 - [x] A4: Object-Oriented Programming (Classes, Interfaces, Mixins, Static, Factory)
 - [x] A3_A4_Supplement: Bài tập bổ sung (List Processing, MathConstants, Logger Singleton)
 - [x] A5: Null Safety (Nullable, ?, ??, ??=, late, !)
+- [x] A6: Collections (List, Set, Map, Higher-order methods: map, where, reduce, fold, sort)
+- [x] A7: Asynchronous Programming (Future, async/await, Stream) - Score: 90%
 - [x] Exercise 2.4: BankAccount class
 
 ### Environment
@@ -400,4 +402,4 @@
 
 ---
 
-*Last Updated: 28/12/2024*
+*Last Updated: 31/12/2025*
